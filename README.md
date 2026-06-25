@@ -26,7 +26,7 @@ This project demonstrates real-world Next.js concepts:
 - Next.js App Router (`app/` directory)
 - Server Actions for CRUD operations
 - Route protection via middleware
-- Dynamic routes (`/account/reservations/edit/[id]`)
+- Dynamic routes: `/account/reservations/edit/[id]`
 - Data fetching per user session
 - Optimistic UI updates with `useOptimistic`
 - Cache invalidation using Next.js revalidation APIs
@@ -35,64 +35,63 @@ This project demonstrates real-world Next.js concepts:
 ---
 
 ## 🏗️ Project Structure
+
 app/
 ├── account/
-│ └── reservations/
-│ └── edit/[id]/ → Edit reservation page
-│ └── page.js → User reservations list
+│   └── reservations/
+│       ├── edit/[id]/ → Edit reservation page
+│       └── page.js → User reservations list
 ├── api/ → Server actions / handlers
 ├── components/ → Reusable UI components
 ├── lib/ → Utilities & helpers
 middleware.js → Route protection
-
-app/
-├── account/
-│ └── reservations/
-│ └── edit/[id]/ → Edit reservation page
-│ └── page.js → User reservations list
-├── api/ → Server actions / handlers
-├── components/ → Reusable UI components
-├── lib/ → Utilities & helpers
-middleware.js → Route protection
-
 
 ---
 
 ## ✏️ Edit Reservation Flow
 
-1. User clicks **Edit Reservation**
+- User clicks "Edit Reservation"
+- Route: `/account/reservations/edit/[id]`
+- Fetch booking using `getBooking(id)`
+- User updates form fields
+- Submit via Server Action: `updateReservation(formData)`
+- Server validates:
+  - Authentication
+  - Ownership of reservation
+- Update executed: `updateBooking(id, updateFields)`
+- Cache revalidated
+- Redirect to `/account/reservations`
 
-2. Route:
-/account/reservations/edit/[id]
-Fetch current booking:
-getBooking(id)
-User updates form fields
-Submit via Server Action:
-updateReservation(formData)
-Backend validates:
-User authentication
-Ownership of reservation (security check)
-Update executed:
-updateBooking(id, updateFields)
-Cache is revalidated
-Redirect user:
-redirect("/account/reservations")
+---
 
-🔐 Security Considerations
-Users can only edit their own reservations
-Server-side authorization enforced before updates
-No client-only trust for booking IDs
-⚡ Performance Improvements
-Server Components used where possible
-Cache revalidation after mutations
-Optimistic UI for smoother UX
-🧪 Future Improvements
-Payment integration (Stripe)
-Admin dashboard for hotel owners
-Advanced filtering (price, location, availability)
-Email confirmations for bookings
-Unit & integration testing
-🛠️ Getting Started
+## 🔐 Security Considerations
+
+- Users can only edit their own reservations
+- Server-side authorization enforced
+- No client-side trust for booking IDs
+
+---
+
+## ⚡ Performance Improvements
+
+- Server Components used where possible
+- Cache revalidation after mutations
+- Optimistic UI for better UX
+
+---
+
+## 🧪 Future Improvements
+
+- Payment integration (Stripe)
+- Admin dashboard for hotel owners
+- Advanced filtering (price, location, availability)
+- Email confirmations for bookings
+- Unit & integration testing
+
+---
+
+## 🛠️ Getting Started
+
 git clone https://github.com/Ramahadam/Hotel-booking-nextjs-app.git
 cd Hotel-booking-nextjs-app
 npm install
@@ -100,3 +99,13 @@ npm run dev
 
 Open: http://localhost:3000
 
+---
+
+## 📦 Tech Stack
+
+- Next.js (App Router)
+- React
+- Tailwind CSS
+- Server Actions
+- Middleware
+- JavaScript 
